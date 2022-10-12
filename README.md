@@ -2,7 +2,7 @@
 [![Clean code](https://github.com/floodoo/gun_club/actions/workflows/clean-code.yml/badge.svg)](https://github.com/floodoo/gun_club/actions/workflows/clean-code.yml)
 
 ## Setup and run project
-
+**Required** flutter version: `^3.3.4`
 ### With make file
 1. git clone project
 2. make clean
