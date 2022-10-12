@@ -4,6 +4,12 @@ run:
 run-release:
 	flutter run --release
 
+run-web:
+	flutter run -d web-server --web-hostname localhost --web-port 3000
+
+run-web-release:
+	flutter run --release -d web-server --web-hostname localhost --web-port 3000
+
 format:
 	flutter format . --line-length 120 --set-exit-if-changed
 
