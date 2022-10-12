@@ -1,5 +1,6 @@
 enum Environment { dev, stage, prod }
 
+// Get this value from dart define
 // defaultValue: Environment.dev.name doesn't work
 const environment = String.fromEnvironment("ENVIRONMENT", defaultValue: "dev");
 

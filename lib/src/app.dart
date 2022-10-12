@@ -1,245 +1,42 @@
-import "package:flutter/material.dart";
-import "package:supabase_flutter/supabase_flutter.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gun_club/config.dart';
+import 'package:gun_club/router.dart';
+import 'package:gun_club/src/core/constants/supabase.constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Schützenverein Verwaltung",
-      home: MyWidget(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    // TODO: Currentlly you can just change the url and it navigates to homepage(when not logged in). This should redirect on login page.
+    supabase.auth.onAuthStateChange(
+      (event, session) {
+        debugPrint("SUPABASE AUTH-EVENT: $event");
+        switch (event) {
+          case AuthChangeEvent.signedIn:
+            router.go("/");
+            break;
+          case AuthChangeEvent.signedOut:
+            router.go("/login");
+            break;
+          default:
+            break;
+        }
+      },
     );
-  }
-}
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  User? _user;
-  @override
-  void initState() {
-    _getAuth();
-    super.initState();
-  }
-
-  Future<void> _getAuth() async {
-    setState(() {
-      _user = Supabase.instance.client.auth.currentUser;
-    });
-    Supabase.instance.client.auth.onAuthStateChange((event, session) {
-      setState(() {
-        _user = session?.user;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile Example"),
-      ),
-      body: _user == null ? const _LoginForm() : const _ProfileForm(),
+    return MaterialApp.router(
+      title: "Schützenverein Verwaltung", // TODO: Change name
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
+      debugShowCheckedModeBanner: !isProduction,
+      // TODO: Theming
+      // TODO: Localizations
     );
-  }
-}
-
-class _LoginForm extends StatefulWidget {
-  const _LoginForm({Key? key}) : super(key: key);
-
-  @override
-  State<_LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<_LoginForm> {
-  bool _loading = false;
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _loading
-        ? const Center(child: CircularProgressIndicator())
-        : ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                controller: _emailController,
-                decoration: const InputDecoration(label: Text("Email")),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                obscureText: true,
-                controller: _passwordController,
-                decoration: const InputDecoration(label: Text("Password")),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  setState(() {
-                    _loading = true;
-                  });
-                  try {
-                    final email = _emailController.text;
-                    final password = _passwordController.text;
-                    await Supabase.instance.client.auth.signIn(
-                      email: email,
-                      password: password,
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Login failed"),
-                      backgroundColor: Colors.red,
-                    ));
-                    setState(() {
-                      _loading = false;
-                    });
-                  }
-                },
-                child: const Text("Login"),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () async {
-                  setState(() {
-                    _loading = true;
-                  });
-                  try {
-                    final email = _emailController.text;
-                    final password = _passwordController.text;
-                    await Supabase.instance.client.auth.signUp(email, password);
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Signup failed"),
-                      backgroundColor: Colors.red,
-                    ));
-                    setState(() {
-                      _loading = false;
-                    });
-                  }
-                },
-                child: const Text("Signup"),
-              ),
-            ],
-          );
-  }
-}
-
-class _ProfileForm extends StatefulWidget {
-  const _ProfileForm({Key? key}) : super(key: key);
-
-  @override
-  State<_ProfileForm> createState() => _ProfileFormState();
-}
-
-class _ProfileFormState extends State<_ProfileForm> {
-  var _loading = true;
-  final _usernameController = TextEditingController();
-  final _websiteController = TextEditingController();
-
-  @override
-  void initState() {
-    _loadProfile();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _websiteController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _loadProfile() async {
-    try {
-      final userId = Supabase.instance.client.auth.currentUser!.id;
-      final data =
-          (await Supabase.instance.client.from("profiles").select().match({"id": userId}).maybeSingle()) as Map?;
-      if (data != null) {
-        setState(() {
-          _usernameController.text = data["username"];
-          _websiteController.text = data["website"];
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Error occured while getting profile"),
-        backgroundColor: Colors.red,
-      ));
-    }
-    setState(() {
-      _loading = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _loading
-        ? const Center(child: CircularProgressIndicator())
-        : ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  label: Text("Username"),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _websiteController,
-                decoration: const InputDecoration(
-                  label: Text("Website"),
-                ),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      setState(() {
-                        _loading = true;
-                      });
-                      final userId = Supabase.instance.client.auth.currentUser!.id;
-                      final username = _usernameController.text;
-                      final website = _websiteController.text;
-                      await Supabase.instance.client.from("profiles").upsert({
-                        "id": userId,
-                        "username": username,
-                        "website": website,
-                      });
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Saved profile"),
-                        ));
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Error saving profile"),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
-                    setState(() {
-                      _loading = false;
-                    });
-                  },
-                  child: const Text("Save")),
-              const SizedBox(height: 16),
-              TextButton(onPressed: () => Supabase.instance.client.auth.signOut(), child: const Text("Sign Out")),
-            ],
-          );
   }
 }
