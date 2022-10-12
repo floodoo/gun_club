@@ -1,4 +1,4 @@
-name: Clean code
+name: Check code
 
 on: pull_request
 
@@ -15,6 +15,8 @@ jobs:
         with:
           channel: "stable"
 
+      - run: flutter --version
       - run: make format
+      - run: make clean
       - run: make lint
     # - run: make test
