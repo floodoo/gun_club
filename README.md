@@ -3,13 +3,14 @@
 
 ## Setup and run project
 **Required** flutter version: `^3.3.4`
-### With make file
+
+### With Makefile
 1. git clone project
 2. make clean
 3. make run-web
 4. [http://localhost:3000](http://localhost:3000) aufrufen
 
-### Without make file
+### Without Makefile
 1. git clone
 2. flutter clean
 3. flutter pub get
