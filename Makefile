@@ -1,74 +1,68 @@
-FLUTTER := $(shell which flutter)
+run:
+	flutter run
+
+run-release:
+	flutter run --release
+
+run-web:
+	flutter run -d web-server --web-hostname localhost --web-port 3000
+
+run-web-release:
+	flutter run --release -d web-server --web-hostname localhost --web-port 3000
 
 format:
-	@echo "╠ Format code..."
-	$(FLUTTER) format . --line-length 120 --set-exit-if-changed
+	flutter format . --line-length 120 --set-exit-if-changed
 
-format-fix: 
-	@echo "╠ Format code..."
-	$(FLUTTER) format . --line-length 120
+format-fix:
+	flutter format . --line-length 120
 
-analyze:
-	@echo "╠ Verifying code..."
-	$(FLUTTER) analyze
+lint:
+	flutter analyze
 
 test:
-	@echo "╠ Running tests..."
-	$(FLUTTER) test
+	flutter test
 .PHONY: test
 
-outdated:
-	@echo "╠ Check outdated dependencies..."
-	$(FLUTTER) pub outdated
+packages-outdated:
+	flutter pub outdated
 
-upgrade-packages:
-	@echo "╠ Upgrading dependencies..."
-	$(FLUTTER) pub upgrade
+packages-upgrade:
+	flutter pub upgrade
 
 clean:
-	@echo "╠ Cleaning project..."
-	$(FLUTTER) clean
-	$(FLUTTER) pub get
-	make format-fix
+	flutter clean
+	flutter pub get
+	make build-runner
 
-clean-hard:
-	@echo "╠ Hard cleaning project..."
-	rm pubspec.lock
-	rm ios/Podfile.lock
-	rm -rf ios/Pods
-	rm -rf ios/Runner.xcworkspace
-	cd ios && pod install --repo-update && cd ..
-	# rm -rf ios/.symlinks
-	# pod cache clean --all
-	# rm -rf ios/Flutter/Flutter.framework
-	# $(FLUTTER) pub cache repair
+build-runner:
+	flutter pub run build_runner build --delete-conflicting-outputs
+
+appicon-generate:
+	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
+
+splashscreen-generate:
+	flutter pub run flutter_native_splash:create
+
+build-ios:
+	@echo "Build iOS"
 	make clean
-	$(FLUTTER) pub upgrade
+	rm -rf ios/dist
+	# flutter build ipa --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --analyze-size --suppress-analytics
+	flutter build ipa --obfuscate --split-debug-info=./dist/debug/ --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --suppress-analytics
+	cp build/ios/ipa/app.ipa dist/app.ipa
 
-build-android-debug-apk:
-	@echo "╠ Building android debug apk..."
-	$(FLUTTER) packages get
-	$(FLUTTER) clean
-	$(FLUTTER) build apk --debug
+build-android-apk:
+	@echo "Build APK's"
+	make clean
+	# flutter build apk --target-platform=android-arm64 --analyze-size
+	flutter build apk --target-platform=android-arm,android-arm64 --obfuscate --split-debug-info=./dist/debug/
+	cp build/app/outputs/apk/release/app-release.apk dist/
+	mv dist/app-release.apk dist/app.apk
 
-build-android-release-apk:
-	@echo "╠ Building android release apk..."
-	$(FLUTTER) packages get
-	$(FLUTTER) clean
-	$(FLUTTER) build apk --release
-	mkdir build-output
-	cp build/app/outputs/flutter-apk/app-release.apk build-output/
-	mv build-output/app-release.apk build-output/untis_phasierung_release.apk
-
-build-android-release-aab:
-	@echo "╠ Building android aab..."
-	$(FLUTTER) packages get
-	$(FLUTTER) clean
-	$(FLUTTER) build appbundle --release
-
-build-macos-release-dmg:
-	@echo "╠ Building macos release dmg..."
-	$(FLUTTER) packages get
-	$(FLUTTER) clean
-	$(FLUTTER) build macos --release
-	appdmg dmg/config.json dmg/untis_phasierung.dmg
+build-android-appbundle:
+	@echo "Build Store App Bundle"
+	make clean
+	# flutter build appbundle --analyze-size
+	flutter build appbundle --obfuscate --split-debug-info=./dist/debug/
+	cp build/app/outputs/bundle/release/app-release.aab dist/
+	mv dist/app-release.aab dist/app.aab
