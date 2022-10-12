@@ -1,7 +1,7 @@
 # Gun club
 [![Clean code](https://github.com/floodoo/gun_club/actions/workflows/clean-code.yml/badge.svg)](https://github.com/floodoo/gun_club/actions/workflows/clean-code.yml)
 
-## Setup project
+## Setup and run project
 
 ### With make file
 1. git clone project
