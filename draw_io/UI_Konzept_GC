@@ -1,1 +1,54 @@
-<mxfile host="app.diagrams.net" modified="2022-12-07T08:27:16.926Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" version="20.6.0" etag="NQdTpuv6t9imc2dwPB8q" type="github"><diagram id="Xy4S6qP0ZfzxPtBBLNPG">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-12-07T10:32:58.543Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" version="20.6.0" etag="oocaPryIEoHWKIrFD276" type="github">
+  <diagram id="z181yoymrq-gD8WaJvv0" name="Seite-1">
+    <mxGraphModel dx="696" dy="494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-14" value="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PcIzgB6d0ZGrzSQva_-I-2" target="PcIzgB6d0ZGrzSQva_-I-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-15" value="Renter Admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PcIzgB6d0ZGrzSQva_-I-2" target="PcIzgB6d0ZGrzSQva_-I-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PcIzgB6d0ZGrzSQva_-I-2" target="PcIzgB6d0ZGrzSQva_-I-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-17" value="Super Admin" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PcIzgB6d0ZGrzSQva_-I-16">
+          <mxGeometry x="0.4162" y="-4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-2" value="Gun Club {Branding}" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-18" value="Benutzername&lt;br&gt;Passwort" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="PcIzgB6d0ZGrzSQva_-I-2">
+          <mxGeometry x="40" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-19" value="(B) Login" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="PcIzgB6d0ZGrzSQva_-I-2">
+          <mxGeometry x="60" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-6" value="[i] -&amp;gt; Mei. Dat.&lt;br&gt;[i] -&amp;gt; Doks&lt;br&gt;[i] -&amp;gt; Kalender&lt;br&gt;[i] -&amp;gt; B.N&lt;br&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Lizensen&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Report&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Statistik&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="80" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-8" value="User&lt;br&gt;Renter Admin&lt;br&gt;Super Admin" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-11" value="[i] -&amp;gt; Vererb v.&lt;br&gt;user&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;[i] -&amp;gt; Nutzv.&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;[i] -&amp;gt;&amp;nbsp;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="80" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-12" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="510" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-13" value="[i] -&amp;gt;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="510" width="80" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
