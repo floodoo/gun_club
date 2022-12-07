@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-07T10:41:45.646Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" version="20.6.0" etag="jVgj12CmQGnedaNiWYMG" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-07T10:49:52.348Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" version="20.6.0" etag="K8PYSWnkD_08RLmwnYtG" type="github">
   <diagram id="z181yoymrq-gD8WaJvv0" name="Seite-1">
     <mxGraphModel dx="696" dy="494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -30,7 +30,7 @@
         <mxCell id="PcIzgB6d0ZGrzSQva_-I-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="300" y="40" width="300" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="PcIzgB6d0ZGrzSQva_-I-6" value="[i] -&amp;gt; Mei. Dat.&lt;br&gt;[i] -&amp;gt; Doks&lt;br&gt;[i] -&amp;gt; Kalender&lt;br&gt;[i] -&amp;gt; B.N&lt;br&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Lizensen&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Report&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Statistik&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;align=left;" vertex="1" parent="1">
+        <mxCell id="PcIzgB6d0ZGrzSQva_-I-6" value="[i] -&amp;gt; Profil&lt;br&gt;[i] -&amp;gt; Doks&lt;br&gt;[i] -&amp;gt; Kalender&lt;br&gt;[i] -&amp;gt; Benachr.&lt;br&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Lizenzen&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Report&lt;/div&gt;&lt;div style=&quot;&quot;&gt;[i] -&amp;gt; Statistik&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;rotation=0;align=left;" vertex="1" parent="1">
           <mxGeometry x="300" y="40" width="80" height="200" as="geometry" />
         </mxCell>
         <mxCell id="PcIzgB6d0ZGrzSQva_-I-8" value="User&lt;br&gt;Renter Admin&lt;br&gt;Super Admin" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
