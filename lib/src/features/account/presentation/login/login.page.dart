@@ -24,10 +24,14 @@ class LoginPage extends StatelessWidget {
             decoration: const InputDecoration(hintText: "Password"),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               final email = emailController.text.trim();
               final password = passwordController.text.trim();
-              supabase.auth.signIn(email: email, password: password);
+              try {
+                await supabase.auth.signInWithPassword(email: email, password: password);
+              } catch (e) {
+                debugPrint(e.toString());
+              }
             },
             child: const Text("Login"),
           ),
@@ -35,7 +39,7 @@ class LoginPage extends StatelessWidget {
             onPressed: () {
               final email = emailController.text.trim();
               final password = passwordController.text.trim();
-              supabase.auth.signUp(email, password);
+              supabase.auth.signUp(email: email, password: password);
             },
             child: const Text("Registrieren"),
           ),

@@ -13,8 +13,9 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     // TODO: Currentlly you can just change the url and it navigates to homepage(when not logged in). This should redirect on login page.
-    supabase.auth.onAuthStateChange(
-      (event, session) {
+    supabase.auth.onAuthStateChange.listen(
+      (data) {
+        final AuthChangeEvent event = data.event;
         debugPrint("SUPABASE AUTH-EVENT: $event");
         switch (event) {
           case AuthChangeEvent.signedIn:
