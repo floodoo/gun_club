@@ -37,6 +37,9 @@ clean:
 build-runner:
 	flutter pub run build_runner build --delete-conflicting-outputs
 
+build-runner-watch:
+	flutter pub run build_runner watch --delete-conflicting-outputs
+
 appicon-generate:
 	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
 
