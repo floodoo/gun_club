@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-14T09:15:43.457Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="l42NOOk4D66sg6CPrjfK" version="20.6.0" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-12-14T09:35:57.151Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="9MDno7Ny5eHh2QaCz7MG" version="20.6.0" type="github" pages="2">
   <diagram id="z181yoymrq-gD8WaJvv0" name="Seite-1">
     <mxGraphModel dx="696" dy="1321" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -186,6 +186,12 @@
         </mxCell>
         <mxCell id="vHGm4tRb6dIwaR-IO3X7-27" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="720" y="50" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vHGm4tRb6dIwaR-IO3X7-28" value="&quot;Benachrichtigungen&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="-360" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vHGm4tRb6dIwaR-IO3X7-30" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-280" width="200" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
