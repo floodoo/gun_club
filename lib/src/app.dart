@@ -1,43 +1,88 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gun_club/config.dart';
 import 'package:gun_club/router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends ConsumerStatefulWidget {
+  const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(routerProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _AppState();
+}
 
-    // TODO: Currentlly you can just change the url and it navigates to homepage(when not logged in). This should redirect on login page.
+class _AppState extends ConsumerState<App> {
+  @override
+  void initState() {
+    supabaseInit();
+
     supabase.auth.onAuthStateChange.listen(
       (data) {
         final AuthChangeEvent event = data.event;
         debugPrint("SUPABASE AUTH-EVENT: $event");
         switch (event) {
           case AuthChangeEvent.signedIn:
-            router.go("/");
             break;
           case AuthChangeEvent.signedOut:
-            router.go("/login");
             break;
           default:
             break;
         }
       },
     );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: "Schützenverein Verwaltung", // TODO: Change name
+      title: "Schützenverein Verwaltung",
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
-      debugShowCheckedModeBanner: !isProduction,
-      // TODO: Theming
-      // TODO: Localizations
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
+        brightness: Brightness.dark,
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: kIsWeb
+              ? {
+                  // No animations for every OS if the app running on the web
+                  for (final platform in TargetPlatform.values) platform: const NoTransitionsBuilder(),
+                }
+              : const {},
+        ),
+      ),
     );
+  }
+}
+
+Future<void> supabaseInit() async {
+  try {
+    final initialSession = await SupabaseAuth.instance.initialSession;
+    debugPrint('SUPABASE INITIAL SESSION: ${initialSession != null ? true : false}');
+  } catch (e) {
+    debugPrint('ERROR: SUPABASE INITIAL SESSION FAILED: $e');
+  }
+}
+
+class NoTransitionsBuilder extends PageTransitionsBuilder {
+  const NoTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T>? route,
+    BuildContext? context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget? child,
+  ) {
+    // only return the child without warping it with animations
+    return child!;
   }
 }

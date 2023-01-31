@@ -11,5 +11,5 @@ Future<void> main() async {
   await initGlobalProviders();
   await Supabase.initialize(url: baseURL, anonKey: anonKey);
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: App()));
 }

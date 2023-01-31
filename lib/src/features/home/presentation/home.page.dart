@@ -12,11 +12,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           const Text("Home Page"),
-          ElevatedButton(
-            onPressed: () => supabase.auth.signOut(),
-            child: const Text("SignOut"),
-          ),
-          Text(supabase.auth.currentUser?.email ?? "null"),
+          Text(supabase.auth.currentUser?.email ?? "no user"),
         ],
       ),
     );
