@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-01-31T11:05:16.570Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.55" etag="7pn40Cpm_fCOUD3fXwiU" version="20.6.0" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2023-01-31T13:44:40.458Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.55" etag="a2ctXcTfdsWr9lEJ4c9M" version="20.6.0" type="github" pages="2">
   <diagram id="z181yoymrq-gD8WaJvv0" name="Seite-1">
-    <mxGraphModel dx="870" dy="1413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1160" dy="1608" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -98,8 +98,8 @@
         <mxCell id="6mhPY97K4QclaKSI7AwX-5" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
           <mxGeometry x="665" y="-75" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="6mhPY97K4QclaKSI7AwX-6" value="&quot;Lizensübersicht&quot;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="770" y="-120" width="120" height="30" as="geometry" />
+        <mxCell id="6mhPY97K4QclaKSI7AwX-6" value="&quot;Lizensübersicht&quot; [Datum erhalt und Valid bis]" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="770" y="-120" width="260" height="30" as="geometry" />
         </mxCell>
         <mxCell id="VPAoZwe_mOKo-sv5d_9H-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="6mhPY97K4QclaKSI7AwX-7" target="VPAoZwe_mOKo-sv5d_9H-1">
           <mxGeometry relative="1" as="geometry">
@@ -218,6 +218,9 @@
         </mxCell>
         <mxCell id="VPAoZwe_mOKo-sv5d_9H-8" value="&quot;Neue Lizenz beantragen&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1220" y="-130" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VPAoZwe_mOKo-sv5d_9H-9" value="&quot;Statistik&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="830" y="50" width="170" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
