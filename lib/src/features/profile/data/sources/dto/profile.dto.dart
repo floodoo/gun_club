@@ -10,9 +10,11 @@ class ProfileDto with _$ProfileDto {
     required String firstName,
     required String lastName,
     required DateTime dateOfBirth,
+    required String email,
+    @Default(false) bool gunLicense,
     required DateTime registeredSince,
-    required String adressId,
-    required String userTypeId,
+    required int userTypeId,
+    required String addressId,
   }) = _ProfileDto;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) => _$ProfileDtoFromJson(json);

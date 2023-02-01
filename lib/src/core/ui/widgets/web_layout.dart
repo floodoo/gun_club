@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
+import 'package:gun_club/src/features/gun_license/presentation/gun_license.page.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.page.dart';
 
 class WebLayout extends StatefulWidget {
@@ -20,7 +21,7 @@ class _WebLayoutState extends State<WebLayout> {
       children: const [
         ProfilePage(),
         Text("Kalender"),
-        Text("Lizenzen"),
+        GunLicensePage(),
         Text("Report"),
         Text("Statistik"),
       ],
@@ -82,9 +83,7 @@ class _WebLayoutState extends State<WebLayout> {
             ],
           ),
           const VerticalDivider(thickness: 1, width: 1),
-          Expanded(
-            child: child,
-          )
+          Expanded(child: Center(child: child)),
         ],
       ),
     );
