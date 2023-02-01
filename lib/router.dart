@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
+import 'package:gun_club/src/core/ui/widgets/start.page.dart';
 import 'package:gun_club/src/core/ui/widgets/web_layout.dart';
 import 'package:gun_club/src/features/account/presentation/login.page.dart';
-import 'package:gun_club/src/core/ui/widgets/start.page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) => _goRouter);
 final _goRouter = GoRouter(
@@ -21,7 +21,7 @@ final _goRouter = GoRouter(
       return "/start";
     }
 
-    return null;
+    return state.location;
   },
   routes: [
     GoRoute(
