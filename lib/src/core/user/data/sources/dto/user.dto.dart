@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile.dto.freezed.dart';
-part 'profile.dto.g.dart';
+part 'user.dto.freezed.dart';
+part 'user.dto.g.dart';
 
 @freezed
-class ProfileDto with _$ProfileDto {
-  const factory ProfileDto({
+class UserDto with _$UserDto {
+  const factory UserDto({
     required String memberId,
     required String firstName,
     required String lastName,
@@ -15,7 +15,7 @@ class ProfileDto with _$ProfileDto {
     required DateTime registeredSince,
     required int usertypeId,
     required String addressId,
-  }) = _ProfileDto;
+  }) = _UserDto;
 
-  factory ProfileDto.fromJson(Map<String, dynamic> json) => _$ProfileDtoFromJson(json);
+  factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
 import 'package:gun_club/src/features/gun_license/presentation/gun_license.page.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.page.dart';
 
-class WebLayout extends StatefulWidget {
+class WebLayout extends ConsumerStatefulWidget {
   const WebLayout({Key? key}) : super(key: key);
 
   @override
-  State<WebLayout> createState() => _WebLayoutState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _WebLayoutState();
 }
 
-class _WebLayoutState extends State<WebLayout> {
+class _WebLayoutState extends ConsumerState<WebLayout> {
   int _selectedIndex = 0;
 
   @override

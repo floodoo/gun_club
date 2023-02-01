@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gun_club/src/features/gun_license/presentation/gun_license.controller.dart';
+import 'package:gun_club/src/core/user/controller/user.controller.dart';
 
 class GunLicensePage extends ConsumerStatefulWidget {
   const GunLicensePage({super.key});
@@ -14,12 +14,12 @@ class _GunLicensePageState extends ConsumerState<GunLicensePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(gunLicenseControllerProvider).when(
-          data: (license) {
+    return ref.watch(userControllerProvider).when(
+          data: (user) {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Text("Has gun license: ${license.gunLicense.toString()}"),
+                  Text("Has gun license: ${user.gunLicense.toString()}"),
                   ElevatedButton(
                     onPressed: _isLoading
                         ? null

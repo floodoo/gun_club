@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gun_club/src/features/profile/presentation/profile.controller.dart';
+import 'package:gun_club/src/core/user/controller/user.controller.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(profileControllerProvider).when(
+    return ref.watch(userControllerProvider).when(
           data: (profile) {
             return SingleChildScrollView(
               child: Column(
