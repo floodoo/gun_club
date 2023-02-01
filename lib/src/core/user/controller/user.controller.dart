@@ -9,7 +9,6 @@ part 'user.controller.g.dart';
 class UserController extends _$UserController {
   @override
   Future<UserDto> build() async {
-    final user = await UserApi().getProfile(userId: supabase.auth.currentUser!.id);
-    return user;
+    return ref.read(userApiProvider).getProfile(userId: supabase.auth.currentUser!.id);
   }
 }

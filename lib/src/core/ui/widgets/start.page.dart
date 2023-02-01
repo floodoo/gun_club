@@ -8,7 +8,8 @@ class StartPage extends ConsumerWidget {
 
   Future<void> navigateToHome(BuildContext context) async {
     final goRouter = GoRouter.of(context);
-    await Future.delayed(Duration.zero);
+    // Hack to wait for the user. This is a temporary solution.
+    await Future.delayed(const Duration(milliseconds: 500));
     goRouter.go('/');
   }
 

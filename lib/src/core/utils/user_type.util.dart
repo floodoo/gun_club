@@ -9,7 +9,16 @@ class UserType {
 
   @override
   String toString() {
-    return 'UserType{value: $value}';
+    switch (value) {
+      case 0:
+        return 'Mitglied';
+      case 1:
+        return 'Senior Admin';
+      case 2:
+        return 'Admin';
+      default:
+        return 'Mitglied';
+    }
   }
 }
 

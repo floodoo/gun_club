@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
 import 'package:gun_club/src/core/user/controller/user.controller.dart';
 import 'package:gun_club/src/core/utils/user_type.util.dart';
+import 'package:gun_club/src/features/admin/presentation/admin.page.dart';
 import 'package:gun_club/src/features/gun_license/presentation/gun_license.page.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.page.dart';
 
@@ -28,7 +29,7 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
         const Text("Report"),
         const Text("Statistik"),
         if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) == UserType.admin)
-          const Text("Admin"),
+          const AdminPage()
       ],
     );
 
