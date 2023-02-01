@@ -56,8 +56,9 @@ class ProfilePage extends ConsumerWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
                     const Divider(),
+                    const SizedBox(height: 20),
                     const Text(
                       "Besichtigungen: 5",
                       style: TextStyle(

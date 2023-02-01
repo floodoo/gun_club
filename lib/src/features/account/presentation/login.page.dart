@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                               try {
                                 await supabase.auth.signInWithPassword(email: email, password: password);
                                 setState(() => isLoading = false);
-                                goRouter.go("/");
+                                goRouter.go("/start");
                               } on AuthException catch (e) {
                                 setState(() => isLoading = false);
                                 debugPrint(e.toString());

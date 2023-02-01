@@ -16,12 +16,7 @@ final _goRouter = GoRouter(
       return "/login";
     }
 
-    if (supabase.auth.currentUser != null &&
-        (state.location == "/login" || state.location == "/register" || state.location.contains("access_token"))) {
-      return "/start";
-    }
-
-    return state.location;
+    return null;
   },
   routes: [
     GoRoute(
