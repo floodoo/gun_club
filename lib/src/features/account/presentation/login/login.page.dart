@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, this.register = false}) : super(key: key);
@@ -95,11 +96,21 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() => isLoading = true);
                               final email = emailController.text.trim();
                               final password = passwordController.text.trim();
+                              final goRouter = GoRouter.of(context);
                               try {
                                 await supabase.auth.signInWithPassword(email: email, password: password);
                                 setState(() => isLoading = false);
-                                context.go("/");
-                              } catch (e) {
+                                goRouter.go("/");
+                              } on AuthException catch (e) {
+                                setState(() => isLoading = false);
+                                debugPrint(e.toString());
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(e.message),
+                                  ),
+                                );
+                              }
+                              catch (e) {
                                 setState(() => isLoading = false);
                                 debugPrint(e.toString());
                               }
