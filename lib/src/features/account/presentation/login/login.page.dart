@@ -47,8 +47,10 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        Text(widget.register ? "Du hast einen Account?" : "Noch nicht registriert?",
-                            style: theme.textTheme.caption),
+                        Text(
+                          widget.register ? "Du hast einen Account?" : "Noch nicht registriert?",
+                          style: theme.textTheme.caption,
+                        ),
                         TextButton(
                           onPressed: () => widget.register ? context.go("/login") : context.go("/register"),
                           child: Text(
@@ -109,8 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                     content: Text(e.message),
                                   ),
                                 );
-                              }
-                              catch (e) {
+                              } catch (e) {
                                 setState(() => isLoading = false);
                                 debugPrint(e.toString());
                               }

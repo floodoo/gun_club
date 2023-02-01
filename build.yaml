@@ -3,5 +3,9 @@ targets:
     builders:
       json_serializable:
         options:
-          any_map: true
           explicit_to_json: true
+          field_rename: snake
+      freezed:freezed:
+        generate_for:
+          include:
+            - lib/**.dart
