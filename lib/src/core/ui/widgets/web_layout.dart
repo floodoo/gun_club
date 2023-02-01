@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
+import 'package:gun_club/src/core/user/controller/user.controller.dart';
+import 'package:gun_club/src/core/utils/user_type.util.dart';
 import 'package:gun_club/src/features/gun_license/presentation/gun_license.page.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.page.dart';
 
@@ -19,12 +21,14 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
   Widget build(BuildContext context) {
     final child = IndexedStack(
       index: _selectedIndex,
-      children: const [
-        ProfilePage(),
-        Text("Kalender"),
-        GunLicensePage(),
-        Text("Report"),
-        Text("Statistik"),
+      children: [
+        const ProfilePage(),
+        const Text("Kalender"),
+        const GunLicensePage(),
+        const Text("Report"),
+        const Text("Statistik"),
+        if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) == UserType.admin)
+          const Text("Admin"),
       ],
     );
 
@@ -55,32 +59,39 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
                 ),
               ),
             ),
-            destinations: const [
-              NavigationRailDestination(
+            destinations: [
+              const NavigationRailDestination(
                 icon: Icon(Icons.person_outline_outlined),
                 selectedIcon: Icon(Icons.person),
                 label: Text('Profile'),
               ),
-              NavigationRailDestination(
+              const NavigationRailDestination(
                 icon: Icon(Icons.calendar_today_outlined),
                 selectedIcon: Icon(Icons.calendar_today),
                 label: Text('Kalender'),
               ),
-              NavigationRailDestination(
+              const NavigationRailDestination(
                 icon: Icon(Icons.description_outlined),
                 selectedIcon: Icon(Icons.description),
                 label: Text('Lizenzen'),
               ),
-              NavigationRailDestination(
+              const NavigationRailDestination(
                 icon: Icon(Icons.flag_outlined),
                 selectedIcon: Icon(Icons.flag),
                 label: Text('Report'),
               ),
-              NavigationRailDestination(
+              const NavigationRailDestination(
                 icon: Icon(Icons.stacked_line_chart_outlined),
                 selectedIcon: Icon(Icons.stacked_line_chart),
                 label: Text('Statistik'),
               ),
+              if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
+                  UserType.admin)
+                const NavigationRailDestination(
+                  icon: Icon(Icons.admin_panel_settings_outlined),
+                  selectedIcon: Icon(Icons.admin_panel_settings),
+                  label: Text('Admin'),
+                ),
             ],
           ),
           const VerticalDivider(thickness: 1, width: 1),
