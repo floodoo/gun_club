@@ -3,7 +3,7 @@ import 'package:gun_club/src/features/gun_license/data/sources/dto/gun_license.d
 
 class GunLicenseApi {
   Future<GunLicenseDto> getGunLicense({required String userId}) async {
-    final response = await supabase.from('profiles').select('gun_license').eq('user_id', userId).single();
+    final response = await supabase.from('profiles').select('gun_license').eq('member_id', userId).single();
     return GunLicenseDto.fromJson(response);
   }
 }
