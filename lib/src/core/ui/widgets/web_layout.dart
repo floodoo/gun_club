@@ -28,7 +28,10 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
         const GunLicensePage(),
         const Text("Report"),
         const Text("Statistik"),
-        if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) == UserType.admin)
+        if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
+                UserType.admin ||
+            UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
+                UserType.seniorAdmin)
           const AdminPage()
       ],
     );
@@ -87,7 +90,9 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
                 label: Text('Statistik'),
               ),
               if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
-                  UserType.admin)
+                      UserType.admin ||
+                  UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
+                      UserType.seniorAdmin)
                 const NavigationRailDestination(
                   icon: Icon(Icons.admin_panel_settings_outlined),
                   selectedIcon: Icon(Icons.admin_panel_settings),
