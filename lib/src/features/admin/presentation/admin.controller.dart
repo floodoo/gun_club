@@ -17,6 +17,12 @@ class AdminController extends _$AdminController {
     reload();
   }
 
+  Future<void> attendUser({required String userId}) async {
+    await supabase
+        .from('attendances')
+        .insert({"department_id": "93921126-d13e-4bc1-87ff-86307ff67be6", "member_id": userId});
+  }
+
   void reload() {
     state = const AsyncValue.loading();
     ref.invalidateSelf();
