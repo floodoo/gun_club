@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gun_club/src/core/extensions/date.extension.dart';
 import 'package:gun_club/src/core/user/controller/user.controller.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.controller.dart';
 
@@ -52,7 +53,7 @@ class ProfilePage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        "Mitglied seit: ${profile.registeredSince}",
+                        "Mitglied seit: ${profile.registeredSince.toDDMMYYYY()}",
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -95,7 +96,7 @@ class ProfilePage extends ConsumerWidget {
                                   children: [
                                     Text(attendance.department.name),
                                     const Spacer(),
-                                    Text(attendance.timestamp.toLocal().toString()),
+                                    Text(attendance.timestamp.toDDMMYYYY()),
                                   ],
                                 ),
                               ),
