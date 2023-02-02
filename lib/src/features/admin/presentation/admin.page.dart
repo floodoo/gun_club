@@ -38,6 +38,9 @@ class AdminPage extends ConsumerWidget {
                                     Text(profile.email),
                                   ],
                                 ),
+                                if (profile.dateOfBirth.month == DateTime.now().month &&
+                                    profile.dateOfBirth.day == DateTime.now().day)
+                                  const Icon(Icons.cake),
                                 ElevatedButton(
                                   onPressed: () async {
                                     showDepartmentDialog(context, profile);
