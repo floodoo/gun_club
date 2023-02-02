@@ -1,6 +1,6 @@
-import 'package:gun_club/src/core/constants/supabase.constants.dart';
 import 'package:gun_club/src/features/admin/data/sources/dto/user_profiles.dto.dart';
 import 'package:gun_club/src/features/admin/data/sources/remote/admin.api.dart';
+import 'package:gun_club/src/features/profile/presentation/profile.controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin.controller.g.dart';
@@ -13,14 +13,13 @@ class AdminController extends _$AdminController {
   }
 
   Future<void> updateUserType({required String userId, required int userTypeId}) async {
-    await supabase.from('profiles').update({'usertype_id': userTypeId}).eq('member_id', userId);
+    await ref.read(adminApiProvider).updateUserType(userId: userId, userTypeId: userTypeId);
     reload();
   }
 
   Future<void> attendUser({required String userId}) async {
-    await supabase
-        .from('attendances')
-        .insert({"department_id": "93921126-d13e-4bc1-87ff-86307ff67be6", "member_id": userId});
+    await ref.read(adminApiProvider).attendUser(userId: userId);
+    ref.read(profileControllerProvider.notifier).reload();
   }
 
   void reload() {
