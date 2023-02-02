@@ -30,46 +30,52 @@ class AdminPage extends ConsumerWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  children: [
-                                    Text("${profile.firstName} ${profile.lastName}"),
-                                    Text(profile.email),
-                                  ],
+                                Flexible(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      Text("${profile.firstName} ${profile.lastName}"),
+                                      Text(profile.email),
+                                    ],
+                                  ),
                                 ),
-                                if (profile.dateOfBirth.month == DateTime.now().month &&
-                                    profile.dateOfBirth.day == DateTime.now().day)
-                                  const Icon(Icons.cake),
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    showDepartmentDialog(context, profile);
-                                  },
-                                  child: const Text("Anmelden"),
+                                Flexible(
+                                  flex: 4,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      showDepartmentDialog(context, profile);
+                                    },
+                                    child: const Text("Anmelden"),
+                                  ),
                                 ),
-                                DropdownButton(
-                                  value: profile.usertypeId,
-                                  items: const [
-                                    DropdownMenuItem(
-                                      value: 0,
-                                      child: Text("Member"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: 1,
-                                      child: Text("Rentner Admin"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: 2,
-                                      child: Text("Admin"),
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    if (value == null) return;
+                                Flexible(
+                                  flex: 2,
+                                  child: DropdownButton(
+                                    value: profile.usertypeId,
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: 0,
+                                        child: Text("Member"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 1,
+                                        child: Text("Rentner Admin"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 2,
+                                        child: Text("Admin"),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      if (value == null) return;
 
-                                    ref
-                                        .read(adminControllerProvider.notifier)
-                                        .updateUserType(userId: profile.memberId, userTypeId: value);
-                                  },
+                                      ref
+                                          .read(adminControllerProvider.notifier)
+                                          .updateUserType(userId: profile.memberId, userTypeId: value);
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
