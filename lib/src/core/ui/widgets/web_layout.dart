@@ -24,10 +24,7 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
       index: _selectedIndex,
       children: [
         const ProfilePage(),
-        const Text("Kalender"),
         const GunLicensePage(),
-        const Text("Report"),
-        const Text("Statistik"),
         if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
                 UserType.admin ||
             UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
@@ -70,24 +67,9 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
                 label: Text('Profile'),
               ),
               const NavigationRailDestination(
-                icon: Icon(Icons.calendar_today_outlined),
-                selectedIcon: Icon(Icons.calendar_today),
-                label: Text('Kalender'),
-              ),
-              const NavigationRailDestination(
                 icon: Icon(Icons.description_outlined),
                 selectedIcon: Icon(Icons.description),
                 label: Text('Lizenzen'),
-              ),
-              const NavigationRailDestination(
-                icon: Icon(Icons.flag_outlined),
-                selectedIcon: Icon(Icons.flag),
-                label: Text('Report'),
-              ),
-              const NavigationRailDestination(
-                icon: Icon(Icons.stacked_line_chart_outlined),
-                selectedIcon: Icon(Icons.stacked_line_chart),
-                label: Text('Statistik'),
               ),
               if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
                       UserType.admin ||
