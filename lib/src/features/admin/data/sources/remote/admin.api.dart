@@ -13,10 +13,8 @@ class AdminApi {
     return (response as List<dynamic>).map((json) => UserProfilesDto.fromJson(json)).toList();
   }
 
-  Future<void> attendUser({required String userId}) async {
-    await supabase
-        .from('attendances')
-        .insert({"department_id": "93921126-d13e-4bc1-87ff-86307ff67be6", "member_id": userId});
+  Future<void> attendUser({required String userId, required String departmentId}) async {
+    await supabase.from('attendances').insert({"department_id": departmentId, "member_id": userId});
   }
 
   Future<void> updateUserType({required String userId, required int userTypeId}) async {

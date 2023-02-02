@@ -104,6 +104,7 @@ class ProfilePage extends ConsumerWidget {
                           separatorBuilder: (BuildContext context, int index) => const Divider(),
                         ),
                       ),
+                      const SizedBox(height: 50),
                     ],
                   );
                 },

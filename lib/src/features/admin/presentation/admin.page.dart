@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.controller.dart';
+import 'package:gun_club/src/features/admin/presentation/widgets/department_dialog.dart';
 
 class AdminPage extends ConsumerWidget {
   const AdminPage({super.key});
@@ -41,26 +40,7 @@ class AdminPage extends ConsumerWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () async {
-                                    final scaffoldMessenger = ScaffoldMessenger.of(context);
-                                    try {
-                                      await ref
-                                          .read(adminControllerProvider.notifier)
-                                          .attendUser(userId: profile.memberId);
-                                      scaffoldMessenger.showSnackBar(
-                                        SnackBar(
-                                          content: Text("${profile.firstName} ${profile.lastName} wurde angemeldet"),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      log(e.toString());
-                                      scaffoldMessenger.showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            "Fehler beim anmelden von ${profile.firstName} ${profile.lastName}",
-                                          ),
-                                        ),
-                                      );
-                                    }
+                                    showDepartmentDialog(context, profile);
                                   },
                                   child: const Text("Anmelden"),
                                 ),

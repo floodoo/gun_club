@@ -17,8 +17,8 @@ class AdminController extends _$AdminController {
     reload();
   }
 
-  Future<void> attendUser({required String userId}) async {
-    await ref.read(adminApiProvider).attendUser(userId: userId);
+  Future<void> attendUser({required String userId, required String departmentId}) async {
+    await ref.read(adminApiProvider).attendUser(userId: userId, departmentId: departmentId);
     ref.read(profileControllerProvider.notifier).reload();
   }
 
