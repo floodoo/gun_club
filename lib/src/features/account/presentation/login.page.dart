@@ -100,7 +100,10 @@ class _LoginPageState extends State<LoginPage> {
                               final password = passwordController.text.trim();
                               final goRouter = GoRouter.of(context);
                               try {
-                                await supabase.auth.signInWithPassword(email: email, password: password);
+                                await supabase.auth.signInWithPassword(
+                                  email: email.isEmpty ? null : email,
+                                  password: password,
+                                );
                                 setState(() => isLoading = false);
                                 goRouter.go("/start");
                               } on AuthException catch (e) {

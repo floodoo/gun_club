@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gun_club/src/core/user/data/sources/dto/user.dto.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.controller.dart';
 import 'package:gun_club/src/features/admin/presentation/widgets/department_dialog.dart';
 
@@ -12,47 +13,53 @@ class AdminPage extends ConsumerWidget {
 
     return ref.watch(adminControllerProvider).when(
           data: (profiles) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    Text("User Verwaltung", style: theme.textTheme.headline1?.copyWith(fontSize: 60)),
-                    const SizedBox(height: 50),
-                    ListView.separated(
-                      itemCount: profiles.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final profile = profiles[index];
-                        return Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  flex: 3,
-                                  child: Column(
+            return Scaffold(
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  // ref.read(adminControllerProvider.notifier).createUser(
+                  //       user: UserCreateDto(
+                  //         firstName: "Test",
+                  //         lastName: "Test",
+                  //         dateOfBirth: DateTime.now(),
+                  //       ),
+                  //     );
+                },
+                child: const Icon(Icons.add),
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      Text("User Verwaltung", style: theme.textTheme.headline1?.copyWith(fontSize: 60)),
+                      const SizedBox(height: 50),
+                      ListView.separated(
+                        itemCount: profiles.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final UserDto profile = profiles[index];
+
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
                                     children: [
                                       Text("${profile.firstName} ${profile.lastName}"),
-                                      Text(profile.email),
+                                      Text(profile.email ?? ""),
                                     ],
                                   ),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: ElevatedButton(
+                                  ElevatedButton(
                                     onPressed: () async {
                                       showDepartmentDialog(context, profile);
                                     },
                                     child: const Text("Anmelden"),
                                   ),
-                                ),
-                                Flexible(
-                                  flex: 2,
-                                  child: DropdownButton(
+                                  DropdownButton(
                                     value: profile.usertypeId,
                                     items: const [
                                       DropdownMenuItem(
@@ -76,15 +83,21 @@ class AdminPage extends ConsumerWidget {
                                           .updateUserType(userId: profile.memberId, userTypeId: value);
                                     },
                                   ),
-                                ),
-                              ],
+                                  IconButton(
+                                    onPressed: () {
+                                      ref.read(adminControllerProvider.notifier).deleteUser(userId: profile.memberId);
+                                    },
+                                    icon: const Icon(Icons.delete, color: Colors.red),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) => const Divider(),
-                    ),
-                  ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) => const Divider(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

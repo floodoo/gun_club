@@ -9,7 +9,8 @@ UserApi userApi(UserApiRef ref) => UserApi();
 
 class UserApi {
   Future<UserDto> getProfile({required String userId}) async {
-    final response = await supabase.from('profiles').select().eq('member_id', userId).single();
+    final response =
+        await supabase.from('profiles').select().eq('member_id', userId).is_('mark_as_deleted', false).single();
     return UserDto.fromJson(response);
   }
 }

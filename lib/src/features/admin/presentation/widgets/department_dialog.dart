@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gun_club/src/features/admin/data/sources/dto/user_profiles.dto.dart';
+import 'package:gun_club/src/core/user/data/sources/dto/user.dto.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.controller.dart';
 import 'package:gun_club/src/features/admin/presentation/department.controller.dart';
 
-Future<void> showDepartmentDialog(BuildContext context, UserProfilesDto profile) {
+Future<void> showDepartmentDialog(BuildContext context, UserDto profile) {
   return showDialog(
     context: context,
     builder: (context) {

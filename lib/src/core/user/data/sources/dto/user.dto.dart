@@ -10,11 +10,12 @@ class UserDto with _$UserDto {
     required String firstName,
     required String lastName,
     required DateTime dateOfBirth,
-    required String email,
+    String? email,
     @Default(false) bool gunLicense,
     required DateTime registeredSince,
     required int usertypeId,
     required String addressId,
+    @Default(false) bool markAsDeleted,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
