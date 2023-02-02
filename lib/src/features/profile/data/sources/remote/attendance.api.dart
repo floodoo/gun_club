@@ -9,8 +9,11 @@ AttendanceApi attendanceApi(AttendanceApiRef ref) => AttendanceApi();
 
 class AttendanceApi {
   Future<List<AttendanceModel>> getAttendances({required String userId}) async {
-    final response =
-        await supabase.from('attendances').select('*, department (name)').order('timestamp', ascending: true);
+    final response = await supabase
+        .from('attendances')
+        .select('*, department (name)')
+        .eq("member_id", userId)
+        .order('timestamp', ascending: true);
 
     return (response as List<dynamic>).map((json) => AttendanceModel.fromJson(json)).toList();
   }

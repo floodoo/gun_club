@@ -40,28 +40,30 @@ class AdminPage extends ConsumerWidget {
                                   ],
                                 ),
                                 ElevatedButton(
-                                    onPressed: () async {
-                                      final scaffoldMessenger = ScaffoldMessenger.of(context);
-                                      try {
-                                        await ref
-                                            .read(adminControllerProvider.notifier)
-                                            .attendUser(userId: profile.memberId);
-                                        scaffoldMessenger.showSnackBar(
-                                          SnackBar(
-                                            content: Text("${profile.firstName} ${profile.lastName} wurde angemeldet"),
+                                  onPressed: () async {
+                                    final scaffoldMessenger = ScaffoldMessenger.of(context);
+                                    try {
+                                      await ref
+                                          .read(adminControllerProvider.notifier)
+                                          .attendUser(userId: profile.memberId);
+                                      scaffoldMessenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text("${profile.firstName} ${profile.lastName} wurde angemeldet"),
+                                        ),
+                                      );
+                                    } catch (e) {
+                                      log(e.toString());
+                                      scaffoldMessenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            "Fehler beim anmelden von ${profile.firstName} ${profile.lastName}",
                                           ),
-                                        );
-                                      } catch (e) {
-                                        log(e.toString());
-                                        scaffoldMessenger.showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                                "Fehler beim anmelden von ${profile.firstName} ${profile.lastName}"),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: const Text("Anmelden")),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: const Text("Anmelden"),
+                                ),
                                 DropdownButton(
                                   value: profile.usertypeId,
                                   items: const [
