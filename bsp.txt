@@ -1,0 +1,37 @@
+return (
+		SELECT count(*) 
+		FROM attendances 
+		WHERE timestamp > current_year_start 
+		AND timestamp < current_) > 17;
+
+
+	months_ := array(SELECT (generate_series(
+		date_trunc('month', current_year_start),
+		current_, '1 month'
+	)::date));
+
+
+	is_continuous := TRUE;
+	prev_month := months_[1];
+	FOR i IN 2 .. array_length(integers, 1) LOOP
+		IF prev_month + 1 <> months_[i] THEN
+	  		is_continuous := FALSE;
+	 		EXIT;
+		END IF;
+		prev_month := months_[i];
+  	END LOOP;
+	
+  	RETURN is_continuous;
+
+
+
+FOREACH test IN ARRAY actual_months_ LOOP
+		current_month_ := (EXTRACT(month FROM test));
+		 IF (prev_month + 1) <> current_month_ THEN
+		  is_continuous := FALSE;
+		  EXIT;
+		 END IF;
+		prev_month := current_month_;
+	END LOOP;
+	
+	return is_continuous;
