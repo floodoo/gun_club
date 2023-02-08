@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Text("Gun Club", style: theme.textTheme.headline1),
+              Text("Gun Club", style: theme.textTheme.displayLarge),
               const SizedBox(height: 50),
               SizedBox(
                 width: 300,
@@ -49,13 +49,13 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Text(
                           widget.register ? "Du hast einen Account?" : "Noch nicht registriert?",
-                          style: theme.textTheme.caption,
+                          style: theme.textTheme.bodySmall,
                         ),
                         TextButton(
                           onPressed: () => widget.register ? context.go("/login") : context.go("/register"),
                           child: Text(
                             widget.register ? "Anmelden" : "Registrieren",
-                            style: theme.textTheme.caption?.copyWith(color: theme.colorScheme.secondary),
+                            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.secondary),
                           ),
                         )
                       ],

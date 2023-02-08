@@ -12,8 +12,15 @@ AdminApi adminApi(AdminApiRef ref) => AdminApi();
 
 class AdminApi {
   Future<List<UserDto>> getUserProfiles() async {
-    final response = await supabase.from('profiles').select().is_('mark_as_deleted', false);
-    return (response as List<dynamic>).map((json) => UserDto.fromJson(json)).toList();
+    List<dynamic> response = await supabase.from('profiles').select().is_('mark_as_deleted', false);
+
+    return response.map((json) => UserDto.fromJson(json)).toList();
+  }
+
+  Future<List<UserDto>> getUserBySearch({required String search}) async {
+    List<dynamic> response = await supabase.rpc('search_user', params: {'search_value': search});
+
+    return response.map((json) => UserDto.fromJson(json)).toList();
   }
 
   Future<void> attendUser({required String userId, required String departmentId}) async {

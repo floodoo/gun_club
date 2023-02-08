@@ -13,6 +13,12 @@ class AdminController extends _$AdminController {
     return ref.read(adminApiProvider).getUserProfiles();
   }
 
+  Future<void> getUserProfileBySearch({required String serach}) async {
+    state = const AsyncValue.loading();
+    final users = await ref.read(adminApiProvider).getUserBySearch(search: serach);
+    state = AsyncValue.data(users);
+  }
+
   Future<void> updateUserType({required String userId, required int userTypeId}) async {
     await ref.read(adminApiProvider).updateUserType(userId: userId, userTypeId: userTypeId);
     reload();
@@ -25,7 +31,7 @@ class AdminController extends _$AdminController {
 
   Future<void> createUser({required UserCreateDto user}) async {
     await ref.read(adminApiProvider).createUser(user: user);
-    reload();
+    // reload();
   }
 
   Future<void> deleteUser({required String userId}) async {

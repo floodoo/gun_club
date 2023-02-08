@@ -13,7 +13,7 @@ class AttendanceApi {
         .from('attendances')
         .select('*, department (name)')
         .eq("member_id", userId)
-        .order('timestamp', ascending: true);
+        .order('timestamp', ascending: false);
 
     return (response as List<dynamic>).map((json) => AttendanceModel.fromJson(json)).toList();
   }

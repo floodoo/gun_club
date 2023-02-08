@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gun_club/src/core/user/data/sources/dto/user.dto.dart';
+import 'package:gun_club/src/features/admin/data/sources/dto/user_create.dto.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.controller.dart';
 import 'package:gun_club/src/features/admin/presentation/widgets/department_dialog.dart';
 
@@ -16,13 +17,13 @@ class AdminPage extends ConsumerWidget {
             return Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  // ref.read(adminControllerProvider.notifier).createUser(
-                  //       user: UserCreateDto(
-                  //         firstName: "Test",
-                  //         lastName: "Test",
-                  //         dateOfBirth: DateTime.now(),
-                  //       ),
-                  //     );
+                  ref.read(adminControllerProvider.notifier).createUser(
+                        user: UserCreateDto(
+                          firstName: "Test",
+                          lastName: "Test",
+                          dateOfBirth: DateTime.now(),
+                        ),
+                      );
                 },
                 child: const Icon(Icons.add),
               ),
@@ -32,7 +33,45 @@ class AdminPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 50),
-                      Text("User Verwaltung", style: theme.textTheme.headline1?.copyWith(fontSize: 60)),
+                      Text("User Verwaltung", style: theme.textTheme.displayLarge?.copyWith(fontSize: 60)),
+                      const SizedBox(height: 50),
+                      Autocomplete(
+                        optionsBuilder: (TextEditingValue textEditingValue) {
+                          if (textEditingValue.text == '') {
+                            return const Iterable<String>.empty();
+                          }
+
+                          final suggestedUser = profiles.where((profile) {
+                            final name = "${profile.firstName} ${profile.lastName}".toLowerCase();
+                            final search = textEditingValue.text.toLowerCase();
+
+                            return name.contains(search);
+                          }).toList();
+
+                          return suggestedUser.map((user) => "${user.firstName} ${user.lastName}");
+                        },
+                        fieldViewBuilder: (
+                          BuildContext context,
+                          TextEditingController textEditingController,
+                          FocusNode focusNode,
+                          VoidCallback onFieldSubmitted,
+                        ) {
+                          return TextField(
+                            controller: textEditingController,
+                            focusNode: focusNode,
+                            decoration: const InputDecoration(
+                              labelText: 'Suche',
+                              suffixIcon: Icon(Icons.search),
+                            ),
+                            onSubmitted: (String value) async {
+                              await ref.read(adminControllerProvider.notifier).getUserProfileBySearch(serach: value);
+                            },
+                          );
+                        },
+                        onSelected: (String selection) async {
+                          await ref.read(adminControllerProvider.notifier).getUserProfileBySearch(serach: selection);
+                        },
+                      ),
                       const SizedBox(height: 50),
                       ListView.separated(
                         itemCount: profiles.length,
@@ -44,23 +83,40 @@ class AdminPage extends ConsumerWidget {
                           return Card(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              child: GridView(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 50,
+                                  mainAxisExtent: 50,
+                                ),
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   Column(
                                     children: [
-                                      Text("${profile.firstName} ${profile.lastName}"),
-                                      Text(profile.email ?? ""),
+                                      Text(
+                                        "${profile.firstName} ${profile.lastName}",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        softWrap: true,
+                                      ),
+                                      Text(
+                                        profile.email ?? "",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        softWrap: true,
+                                      ),
                                     ],
                                   ),
                                   ElevatedButton(
                                     onPressed: () async {
-                                      showDepartmentDialog(context, profile);
+                                      await showDepartmentDialog(context, profile);
                                     },
                                     child: const Text("Anmelden"),
                                   ),
                                   DropdownButton(
                                     value: profile.usertypeId,
+                                    isExpanded: true,
                                     items: const [
                                       DropdownMenuItem(
                                         value: 0,
@@ -82,12 +138,6 @@ class AdminPage extends ConsumerWidget {
                                           .read(adminControllerProvider.notifier)
                                           .updateUserType(userId: profile.memberId, userTypeId: value);
                                     },
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      ref.read(adminControllerProvider.notifier).deleteUser(userId: profile.memberId);
-                                    },
-                                    icon: const Icon(Icons.delete, color: Colors.red),
                                   ),
                                 ],
                               ),
