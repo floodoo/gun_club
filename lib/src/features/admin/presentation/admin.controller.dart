@@ -31,7 +31,7 @@ class AdminController extends _$AdminController {
 
   Future<void> createUser({required UserCreateDto user}) async {
     await ref.read(adminApiProvider).createUser(user: user);
-    // reload();
+    reload();
   }
 
   Future<void> deleteUser({required String userId}) async {

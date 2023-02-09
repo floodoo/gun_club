@@ -22,6 +22,7 @@ class AdminPage extends ConsumerWidget {
                           firstName: "Test",
                           lastName: "Test",
                           dateOfBirth: DateTime.now(),
+                          registeredSince: DateTime.now(),
                         ),
                       );
                 },
@@ -85,7 +86,7 @@ class AdminPage extends ConsumerWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: GridView(
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
+                                  crossAxisCount: 4,
                                   crossAxisSpacing: 50,
                                   mainAxisExtent: 50,
                                 ),
@@ -138,6 +139,13 @@ class AdminPage extends ConsumerWidget {
                                           .read(adminControllerProvider.notifier)
                                           .updateUserType(userId: profile.memberId, userTypeId: value);
                                     },
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      ref.read(adminControllerProvider.notifier).deleteUser(userId: profile.memberId);
+                                    },
+                                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                                    child: const Text("Löschen"),
                                   ),
                                 ],
                               ),

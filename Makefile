@@ -11,10 +11,10 @@ run-web-release:
 	flutter run --release -d web-server --web-hostname localhost --web-port 3000
 
 format:
-	flutter format . --line-length 120 --set-exit-if-changed
+	dart format . --line-length 120 --set-exit-if-changed
 
 format-fix:
-	flutter format . --line-length 120
+	dart format . --line-length 120
 
 lint:
 	flutter analyze

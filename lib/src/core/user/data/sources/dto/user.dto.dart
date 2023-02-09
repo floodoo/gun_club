@@ -14,7 +14,7 @@ class UserDto with _$UserDto {
     @Default(false) bool gunLicense,
     required DateTime registeredSince,
     required int usertypeId,
-    required String addressId,
+    String? addressId,
     @Default(false) bool markAsDeleted,
   }) = _UserDto;
 

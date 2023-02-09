@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:gun_club/src/core/constants/supabase.constants.dart';
 import 'package:gun_club/src/core/user/data/sources/dto/user.dto.dart';
 import 'package:gun_club/src/features/admin/data/sources/dto/user_create.dto.dart';
@@ -32,9 +30,9 @@ class AdminApi {
   }
 
   Future<void> createUser({required UserCreateDto user}) async {
-    final result = await supabase.from('auth.users').insert({}).select();
-
-    log(result.toString());
+    final id = await supabase.rpc('create_auth_user').single();
+    final userRequest = user.copyWith(memberId: id);
+    await supabase.from('profiles').insert(userRequest.toJson());
   }
 
   Future<void> deleteUser({required String userId}) async {
