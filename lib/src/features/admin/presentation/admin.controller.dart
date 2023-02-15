@@ -19,6 +19,12 @@ class AdminController extends _$AdminController {
     state = AsyncValue.data(users);
   }
 
+  Future<void> resetSearch() async {
+    state = const AsyncValue.loading();
+    final users = await ref.read(adminApiProvider).getUserProfiles();
+    state = AsyncValue.data(users);
+  }
+
   Future<void> updateUserType({required String userId, required int userTypeId}) async {
     await ref.read(adminApiProvider).updateUserType(userId: userId, userTypeId: userTypeId);
     reload();

@@ -27,42 +27,27 @@ class AdminPage extends ConsumerWidget {
                       const SizedBox(height: 50),
                       Text("User Verwaltung", style: theme.textTheme.displayLarge?.copyWith(fontSize: 60)),
                       const SizedBox(height: 50),
-                      Autocomplete(
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                          if (textEditingValue.text == '') {
-                            return const Iterable<String>.empty();
-                          }
-
-                          final suggestedUser = profiles.where((profile) {
-                            final name = "${profile.firstName} ${profile.lastName}".toLowerCase();
-                            final search = textEditingValue.text.toLowerCase();
-
-                            return name.contains(search);
-                          }).toList();
-
-                          return suggestedUser.map((user) => "${user.firstName} ${user.lastName}");
-                        },
-                        fieldViewBuilder: (
-                          BuildContext context,
-                          TextEditingController textEditingController,
-                          FocusNode focusNode,
-                          VoidCallback onFieldSubmitted,
-                        ) {
-                          return TextField(
-                            controller: textEditingController,
-                            focusNode: focusNode,
-                            decoration: const InputDecoration(
-                              labelText: 'Suche',
-                              suffixIcon: Icon(Icons.search),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: const InputDecoration(
+                                labelText: 'Suche',
+                                suffixIcon: Icon(Icons.search),
+                              ),
+                              onSubmitted: (String value) async {
+                                await ref.read(adminControllerProvider.notifier).getUserProfileBySearch(serach: value);
+                              },
                             ),
-                            onSubmitted: (String value) async {
-                              await ref.read(adminControllerProvider.notifier).getUserProfileBySearch(serach: value);
+                          ),
+                          const SizedBox(width: 50),
+                          IconButton(
+                            onPressed: () async {
+                              await ref.read(adminControllerProvider.notifier).resetSearch();
                             },
-                          );
-                        },
-                        onSelected: (String selection) async {
-                          await ref.read(adminControllerProvider.notifier).getUserProfileBySearch(serach: selection);
-                        },
+                            icon: const Icon(Icons.cancel_outlined),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 50),
                       ListView.separated(
@@ -149,7 +134,7 @@ class AdminPage extends ConsumerWidget {
               ),
             );
           },
-          loading: () => const CircularProgressIndicator(),
+          loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stack) => Text(error.toString()),
         );
   }
