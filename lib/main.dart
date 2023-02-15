@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:gun_club/config.dart';
 import 'package:gun_club/global_providers.dart';
 import 'package:gun_club/src/app.dart';
@@ -10,6 +11,7 @@ Future<void> main() async {
 
   await initGlobalProviders();
   await Supabase.initialize(url: baseURL, anonKey: anonKey);
+  usePathUrlStrategy();
 
   runApp(const ProviderScope(child: App()));
 }

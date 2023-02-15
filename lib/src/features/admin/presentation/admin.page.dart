@@ -115,8 +115,31 @@ class AdminPage extends ConsumerWidget {
                                     },
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {
-                                      ref.read(adminControllerProvider.notifier).deleteUser(userId: profile.memberId);
+                                    onPressed: () async {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text("${profile.firstName} ${profile.lastName} Löschen"),
+                                          content: Text(
+                                            "Möchten Sie den User ${profile.firstName} ${profile.lastName} wirklich löschen?",
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(context),
+                                              child: const Text("Abbrechen"),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                ref
+                                                    .read(adminControllerProvider.notifier)
+                                                    .deleteUser(userId: profile.memberId);
+                                              },
+                                              child: const Text("Löschen"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                                     child: const Text("Löschen"),
