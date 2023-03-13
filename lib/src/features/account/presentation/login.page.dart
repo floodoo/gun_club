@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -141,6 +143,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   final email = emailController.text.trim();
                                   final password = passwordController.text.trim();
                                   await supabase.auth.signUp(email: email, password: password);
+                                  await ref.read(loginControllerProvider.notifier).createUserProfile(
+                                        user: UserCreateDto(
+                                          firstName: firstNameController.text,
+                                          lastName: lastNameController.text,
+                                          dateOfBirth: dateOfBirth,
+                                          email: email,
+                                          registeredSince: DateTime.now(),
+                                        ),
+                                      );
                                   scaffoldMessenger.showSnackBar(
                                     const SnackBar(
                                       content: Text(
@@ -153,6 +164,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   setState(() => isLoading = false);
                                 } catch (e) {
                                   setState(() => isLoading = false);
+                                  log(e.toString());
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e.toString()),
+                                    ),
+                                  );
                                 }
                               }
                             },
@@ -171,15 +188,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   email: email.isEmpty ? null : email,
                                   password: password,
                                 );
-                                await ref.read(loginControllerProvider.notifier).createUserProfile(
-                                      user: UserCreateDto(
-                                        firstName: firstNameController.text,
-                                        lastName: lastNameController.text,
-                                        dateOfBirth: dateOfBirth,
-                                        email: email,
-                                        registeredSince: DateTime.now(),
-                                      ),
-                                    );
                                 setState(() => isLoading = false);
                                 goRouter.go("/start");
                               } on AuthException catch (e) {

@@ -5,10 +5,10 @@
 import FlutterMacOS
 import Foundation
 
-import app_links_macos
+import app_links
 import device_info_plus
 import package_info_plus
-import path_provider_macos
+import path_provider_foundation
 import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

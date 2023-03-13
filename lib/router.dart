@@ -16,6 +16,10 @@ final _goRouter = GoRouter(
       return "/login";
     }
 
+    if (supabase.auth.currentUser != null && (state.location == "/login" || state.location == "/register")) {
+      return "/";
+    }
+
     return null;
   },
   routes: [
