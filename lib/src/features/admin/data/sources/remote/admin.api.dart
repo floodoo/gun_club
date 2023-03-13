@@ -10,7 +10,8 @@ AdminApi adminApi(AdminApiRef ref) => AdminApi();
 
 class AdminApi {
   Future<List<UserDto>> getUserProfiles() async {
-    List<dynamic> response = await supabase.from('profiles').select().is_('mark_as_deleted', false);
+    List<dynamic> response =
+        await supabase.from('profiles').select().is_('mark_as_deleted', false).order('first_name', ascending: true);
 
     return response.map((json) => UserDto.fromJson(json)).toList();
   }
@@ -22,7 +23,7 @@ class AdminApi {
   }
 
   Future<void> attendUser({required String userId, required String departmentId}) async {
-    await supabase.from('attendances').insert({"department_id": departmentId, "member_id": userId});
+    await supabase.from('attendances').insert({'member_id': userId, 'department_id': departmentId});
   }
 
   Future<void> updateUserType({required String userId, required int userTypeId}) async {

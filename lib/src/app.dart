@@ -45,7 +45,7 @@ class _AppState extends ConsumerState<App> {
       routeInformationProvider: router.routeInformationProvider,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
         brightness: Brightness.dark,
@@ -62,6 +62,10 @@ class _AppState extends ConsumerState<App> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.orange,
+          foregroundColor: Colors.white,
         ),
       ),
     );

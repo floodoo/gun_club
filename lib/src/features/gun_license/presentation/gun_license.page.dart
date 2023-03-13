@@ -79,12 +79,6 @@ class _GunLicensePageState extends ConsumerState<GunLicensePage> {
                                     );
                                   }
 
-                                  scaffoldMessenger.showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Lizenz beantragt"),
-                                    ),
-                                  );
-
                                   setState(() {
                                     _isLoading = false;
                                   });

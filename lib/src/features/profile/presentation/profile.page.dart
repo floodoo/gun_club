@@ -17,10 +17,10 @@ class ProfilePage extends ConsumerWidget {
                   return Column(
                     children: [
                       const SizedBox(height: 50),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 80,
-                        backgroundColor: Colors.blue,
-                        child: Icon(Icons.person, size: 100, color: Colors.white),
+                        backgroundColor: Colors.orange.shade800,
+                        child: const Icon(Icons.person, size: 100, color: Colors.white),
                       ),
                       const SizedBox(height: 50),
                       Row(
