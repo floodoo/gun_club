@@ -11,4 +11,9 @@ class UserController extends _$UserController {
   Future<UserDto> build() async {
     return ref.read(userApiProvider).getProfile(userId: supabase.auth.currentUser!.id);
   }
+
+  Future<void> reload() async {
+    state = const AsyncValue.loading();
+    ref.invalidateSelf();
+  }
 }

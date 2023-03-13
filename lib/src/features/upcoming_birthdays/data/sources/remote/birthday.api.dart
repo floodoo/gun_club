@@ -9,7 +9,7 @@ BirthdayApi birthdayApi(BirthdayApiRef ref) => BirthdayApi();
 
 class BirthdayApi {
   Future<List<BirthdayUserDto>> getUpcomingBirthdays() async {
-    List<dynamic> response = await supabase.rpc('upcoming_birthdays');
+    List<dynamic> response = await supabase.from("upcoming_birthdays").select();
     return response.map((json) => BirthdayUserDto.fromJson(json)).toList();
   }
 }
