@@ -7,6 +7,7 @@ import 'package:gun_club/src/core/utils/user_type.util.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.page.dart';
 import 'package:gun_club/src/features/gun_license/presentation/gun_license.page.dart';
 import 'package:gun_club/src/features/profile/presentation/profile.page.dart';
+import 'package:gun_club/src/features/upcoming_birthdays/presentation/upcoming_birthdays.page.dart';
 
 class WebLayout extends ConsumerStatefulWidget {
   const WebLayout({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
       children: [
         const ProfilePage(),
         const GunLicensePage(),
+        const UpcomingBirthdays(),
         if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
                 UserType.admin ||
             UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
@@ -70,6 +72,11 @@ class _WebLayoutState extends ConsumerState<WebLayout> {
                 icon: Icon(Icons.description_outlined),
                 selectedIcon: Icon(Icons.description),
                 label: Text('Lizenzen'),
+              ),
+              const NavigationRailDestination(
+                icon: Icon(Icons.cake_outlined),
+                selectedIcon: Icon(Icons.cake),
+                label: Text('Geburtstage'),
               ),
               if (UserTypeUtil.getUserType(ref.read(userControllerProvider).asData?.value.usertypeId ?? 0) ==
                       UserType.admin ||

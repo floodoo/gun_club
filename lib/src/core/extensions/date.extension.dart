@@ -5,4 +5,9 @@ extension DateTimeExtension on DateTime {
     final date = toLocal();
     return DateFormat('dd.MM.yyyy').format(date);
   }
+
+  bool isToday() {
+    final today = DateTime.now();
+    return year == today.year && month == today.month && day == today.day;
+  }
 }
