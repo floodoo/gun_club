@@ -23,7 +23,7 @@ class AdminApi {
   }
 
   Future<void> attendUser({required String userId, required String departmentId}) async {
-    await supabase.from('attendances').insert([{'member_id': userId, 'department_id': departmentId}]);
+    await supabase.from('attendances').insert({'member_id': userId, 'department_id': departmentId});
   }
 
   Future<void> updateUserType({required String userId, required int userTypeId}) async {
