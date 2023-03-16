@@ -45,7 +45,7 @@ class _AppState extends ConsumerState<App> {
       routeInformationProvider: router.routeInformationProvider,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
         brightness: Brightness.dark,
@@ -64,7 +64,7 @@ class _AppState extends ConsumerState<App> {
           ),
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Colors.orange,
+          backgroundColor: Colors.green,
           foregroundColor: Colors.white,
         ),
       ),
