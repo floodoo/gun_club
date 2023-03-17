@@ -78,9 +78,9 @@ Future<void> showCreateUserDialog(BuildContext context) {
                       },
                     ),
                     const SizedBox(height: 5),
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           "*Dieser User wird sich nicht einloggen können. Fall der User dies wünscht, muss er sich selbst registrieren.",
                           style: TextStyle(color: Colors.grey),
