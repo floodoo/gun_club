@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -28,6 +29,9 @@ class _StartPageState extends ConsumerState<StartPage> {
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 1), () {
+      if (GoRouter.of(context).location == "/start") context.go("/");
+    });
     ref.listen(userControllerProvider, (previous, next) {
       log("Start Page - User Controller: $next");
 
