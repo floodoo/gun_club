@@ -39,6 +39,7 @@ class _StartPageState extends ConsumerState<StartPage> {
         final data = next.asData!.value;
         if (data.firstName == null || data.lastName == null || data.dateOfBirth == null) {
           context.go("/add-profile");
+          return;
         }
         context.go("/");
       }
