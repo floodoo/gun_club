@@ -20,63 +20,79 @@ Future<void> showCreateUserDialog(BuildContext context) {
 
           return AlertDialog(
             title: const Text("User erstellen"),
-            content: Form(
-              key: formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    controller: firstNameController,
-                    decoration: const InputDecoration(labelText: "Vorname"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Bitte einen Vornamen eingeben";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: lastNameController,
-                    decoration: const InputDecoration(labelText: "Nachname"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Bitte einen Nachnamen eingeben";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(labelText: "Email (optional)"),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: dateOfBirthController,
-                    readOnly: true,
-                    onTap: () async {
-                      final DateTime? picked = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      );
+            content: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormField(
+                      controller: firstNameController,
+                      decoration: const InputDecoration(labelText: "Vorname"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Bitte einen Vornamen eingeben";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: lastNameController,
+                      decoration: const InputDecoration(labelText: "Nachname"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Bitte einen Nachnamen eingeben";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: const InputDecoration(labelText: "Email (optional)"),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: dateOfBirthController,
+                      readOnly: true,
+                      onTap: () async {
+                        final DateTime? picked = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
 
-                      if (picked != null) {
-                        dateOfBirth = picked;
-                        dateOfBirthController.text = picked.toDDMMYYYY();
-                      }
-                    },
-                    decoration: const InputDecoration(labelText: "Geburtsdatum"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty || dateOfBirth.isAfter(DateTime.now())) {
-                        return "Bitte ein Geburtsdatum eingeben";
-                      }
-                      return null;
-                    },
-                  ),
-                ],
+                        if (picked != null) {
+                          dateOfBirth = picked;
+                          dateOfBirthController.text = picked.toDDMMYYYY();
+                        }
+                      },
+                      decoration: const InputDecoration(labelText: "Geburtsdatum"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty || dateOfBirth.isAfter(DateTime.now())) {
+                          return "Bitte ein Geburtsdatum eingeben";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 5),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "*Dieser User wird sich nicht einloggen können. Fall der User dies wünscht, muss er sich selbst registrieren.",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Text(
+                          "  Im Nachhinein nicht änderbar.",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             actions: [

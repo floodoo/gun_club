@@ -8,29 +8,45 @@ class UpcomingBirthdays extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(upcomingBirthdaysControllerProvider).when(
-          data: (data) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ListView.separated(
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  final birthdayUser = data[index];
+    final theme = Theme.of(context);
 
-                  return Card(
-                    child: ListTile(
-                      title: Text("${birthdayUser.firstName} ${birthdayUser.lastName}"),
-                      subtitle: Text(birthdayUser.dateOfBirth.toDDMMYYYY()),
-                      trailing: birthdayUser.dateOfBirth.isToday() ? const Icon(Icons.cake, color: Colors.red) : null,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            "Anstehende Geburtstage",
+            style: theme.textTheme.displayLarge?.copyWith(fontSize: 60),
+          ),
+        ),
+        Expanded(
+          child: ref.watch(upcomingBirthdaysControllerProvider).when(
+                data: (data) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ListView.separated(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final birthdayUser = data[index];
+
+                        return Card(
+                          child: ListTile(
+                            title: Text("${birthdayUser.firstName} ${birthdayUser.lastName}"),
+                            subtitle: Text(birthdayUser.dateOfBirth.toDDMMYYYY()),
+                            trailing:
+                                birthdayUser.dateOfBirth.isToday() ? const Icon(Icons.cake, color: Colors.red) : null,
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => const Divider(),
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const Divider(),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stack) => Text(error.toString()),
               ),
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stack) => Text(error.toString()),
-        );
+        )
+      ],
+    );
   }
 }
