@@ -33,4 +33,4 @@
 - [freezed_annotation: ^2.1.0](https://pub.dev/packages/freezed_annotation)
 - [json_annotation: ^4.7.0](https://pub.dev/packages/json_annotation)
 - [json_serializable: ^6.5.1](https://pub.dev/packages/json_serializable)
-- [flutter_launcher_icons: ^0.10.0](https://pub.dev/packages/flutter_launcher_icons) # generate icons for android and ios with config
+- [flutter_launcher_icons: ^0.10.0](https://pub.dev/packages/flutter_launcher_icons) # generate icons for android and ios with config file

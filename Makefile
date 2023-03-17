@@ -62,6 +62,18 @@ build-android-apk:
 	cp build/app/outputs/apk/release/app-release.apk dist/
 	mv dist/app-release.apk dist/app.apk
 
+build-web:
+	@echo "Build Web"
+	make clean
+	rm -rf dist/web
+	flutter build web --release
+	cp -r build/web dist/web
+
+release-web:
+	@echo "Release Web"
+	make build-web
+	vercel --prod --local-config=vercel.json
+
 build-android-appbundle:
 	@echo "Build Store App Bundle"
 	make clean

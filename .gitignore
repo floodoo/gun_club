@@ -46,3 +46,6 @@ app.*.map.json
 # Build-Runner
 **.freezed.dart
 **.g.dart
+.vercel
+
+dist/
