@@ -7,14 +7,13 @@ part 'user.dto.g.dart';
 class UserDto with _$UserDto {
   const factory UserDto({
     required String memberId,
-    required String firstName,
-    required String lastName,
-    required DateTime dateOfBirth,
+    String? firstName,
+    String? lastName,
+    DateTime? dateOfBirth,
     String? email,
     @Default(false) bool gunLicense,
     required DateTime registeredSince,
     required int usertypeId,
-    String? addressId,
     @Default(false) bool markAsDeleted,
   }) = _UserDto;
 

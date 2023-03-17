@@ -36,6 +36,10 @@ class _StartPageState extends ConsumerState<StartPage> {
         throw error.error;
       }
       if (next is AsyncData) {
+        final data = next.asData!.value;
+        if (data.firstName == null || data.lastName == null || data.dateOfBirth == null) {
+          context.go("/add-profile");
+        }
         context.go("/");
       }
     });

@@ -27,7 +27,7 @@ class ProfilePage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            profile.firstName,
+                            profile.firstName ?? "",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class ProfilePage extends ConsumerWidget {
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            profile.lastName,
+                            profile.lastName ?? "",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
