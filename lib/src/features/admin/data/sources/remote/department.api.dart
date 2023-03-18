@@ -12,4 +12,8 @@ class DepartmentApi {
     final response = await supabase.from('department').select();
     return (response as List<dynamic>).map((json) => DepartmentDto.fromJson(json)).toList();
   }
+
+  Future<void> updateUserDepartment({required String userId, required String departmentId}) async {
+    await supabase.from('profiles').update({'department_id': departmentId}).eq('member_id', userId);
+  }
 }

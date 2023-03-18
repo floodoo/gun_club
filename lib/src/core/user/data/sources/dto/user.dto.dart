@@ -15,6 +15,7 @@ class UserDto with _$UserDto {
     required DateTime registeredSince,
     required int usertypeId,
     @Default(false) bool markAsDeleted,
+    String? departmentId,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gun_club/src/core/user/data/sources/dto/user.dto.dart';
 import 'package:gun_club/src/features/admin/presentation/admin.controller.dart';
+import 'package:gun_club/src/features/admin/presentation/department.controller.dart';
 import 'package:gun_club/src/features/admin/presentation/widgets/create_user_dialog.dart';
 import 'package:gun_club/src/features/admin/presentation/widgets/department_dialog.dart';
 
@@ -62,7 +63,7 @@ class AdminPage extends ConsumerWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: GridView(
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
+                                  crossAxisCount: 5,
                                   crossAxisSpacing: 50,
                                   mainAxisExtent: 50,
                                 ),
@@ -114,6 +115,31 @@ class AdminPage extends ConsumerWidget {
                                           .updateUserType(userId: profile.memberId, userTypeId: value);
                                     },
                                   ),
+                                  ref.watch(departmentControllerProvider).when(
+                                        data: (departments) {
+                                          return DropdownButton(
+                                            value: profile.departmentId,
+                                            isExpanded: true,
+                                            items: departments
+                                                .map(
+                                                  (department) => DropdownMenuItem(
+                                                    value: department.departmentId,
+                                                    child: Text(department.name),
+                                                  ),
+                                                )
+                                                .toList(),
+                                            onChanged: (value) {
+                                              if (value == null) return;
+
+                                              ref
+                                                  .read(departmentControllerProvider.notifier)
+                                                  .updateUserDepartment(userId: profile.memberId, departmentId: value);
+                                            },
+                                          );
+                                        },
+                                        loading: () => const Center(child: CircularProgressIndicator()),
+                                        error: (error, stack) => const Center(child: Text("Fehler")),
+                                      ),
                                   ElevatedButton(
                                     onPressed: () async {
                                       await showDialog(
