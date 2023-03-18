@@ -22,6 +22,9 @@ class UpcomingBirthdays extends ConsumerWidget {
         Expanded(
           child: ref.watch(upcomingBirthdaysControllerProvider).when(
                 data: (data) {
+                  if (data.isEmpty) {
+                    return const Center(child: Text("Keine Geburtstage in den nächsten 30 Tagen"));
+                  }
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ListView.separated(

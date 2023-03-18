@@ -72,7 +72,7 @@ build-web:
 release-web:
 	@echo "Release Web"
 	make build-web
-	vercel --prod --local-config=vercel.json
+	vercel --prod
 
 build-android-appbundle:
 	@echo "Build Store App Bundle"
