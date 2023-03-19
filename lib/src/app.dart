@@ -34,12 +34,21 @@ class _AppState extends ConsumerState<App> {
     super.initState();
   }
 
+  Future<void> supabaseInit() async {
+    try {
+      final initialSession = await SupabaseAuth.instance.initialSession;
+      debugPrint('SUPABASE INITIAL SESSION: ${initialSession != null ? true : false}');
+    } catch (e) {
+      debugPrint('ERROR: SUPABASE INITIAL SESSION FAILED: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: "Schützenverein Verwaltung",
+      title: "der glühende Colt",
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
@@ -69,15 +78,6 @@ class _AppState extends ConsumerState<App> {
         ),
       ),
     );
-  }
-}
-
-Future<void> supabaseInit() async {
-  try {
-    final initialSession = await SupabaseAuth.instance.initialSession;
-    debugPrint('SUPABASE INITIAL SESSION: ${initialSession != null ? true : false}');
-  } catch (e) {
-    debugPrint('ERROR: SUPABASE INITIAL SESSION FAILED: $e');
   }
 }
 

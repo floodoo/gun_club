@@ -31,7 +31,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Text("Gun Club", style: theme.textTheme.displayLarge),
+              Text(
+                "der glühende Colt",
+                style: theme.textTheme.displayLarge,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 50),
               SizedBox(
                 width: 300,

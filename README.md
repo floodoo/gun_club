@@ -1,4 +1,4 @@
-# Gun Club
+# der glühende Colt
 
 ## Setup And Run Project
 

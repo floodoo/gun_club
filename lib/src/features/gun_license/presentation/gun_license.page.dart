@@ -42,8 +42,6 @@ class _GunLicensePageState extends ConsumerState<GunLicensePage> {
                               Image.asset("assets/images/gun_license.png"),
                               const SizedBox(height: 20),
                               Text("Lizenznummer: ${user.memberId}"),
-                              const SizedBox(height: 5),
-                              Text("Gültig bis Ende: ${DateTime.now().year}"),
                             ],
                           )
                         : Column(
