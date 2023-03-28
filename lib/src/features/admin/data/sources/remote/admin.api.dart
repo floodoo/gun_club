@@ -33,7 +33,7 @@ class AdminApi {
   Future<void> createUser({required UserCreateDto user}) async {
     final id = await supabase.rpc('create_auth_user').single();
     final userRequest = user.copyWith(memberId: id);
-    await supabase.from('profiles').insert(userRequest);
+    await supabase.from('profiles').upsert(userRequest);
   }
 
   Future<void> deleteUser({required String userId}) async {
