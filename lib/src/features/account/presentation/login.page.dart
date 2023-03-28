@@ -32,7 +32,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             children: [
               const SizedBox(height: 20),
               Text(
-                "der glühende Colt",
+                "Der Glühende Colt",
                 style: theme.textTheme.displayLarge,
                 textAlign: TextAlign.center,
               ),
